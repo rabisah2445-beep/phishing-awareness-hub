@@ -1,0 +1,216 @@
+<!-- Tips Section -->
+    <div id="tips" class="section">
+        <div class="card">
+            <h2>🛡️ Protection Tips</h2>
+            
+            <h3 style="color: #667eea; margin-top: 30px; margin-bottom: 15px;">✅ Do's</h3>
+            <ul style="margin-left: 20px; line-height: 2;">
+                <li><strong>Verify sender addresses</strong> - Check the email domain carefully</li>
+                <li><strong>Hover over links</strong> - See the actual URL before clicking</li>
+                <li><strong>Use 2-factor authentication</strong> - Add extra security layer</li>
+                <li><strong>Keep software updated</strong> - Install security patches</li>
+                <li><strong>Use strong, unique passwords</strong> - Different for each account</li>
+                <li><strong>Report suspicious emails</strong> - Help protect others</li>
+                <li><strong>Contact companies directly</strong> - Use official phone numbers</li>
+                <li><strong>Trust your instincts</strong> - If it feels wrong, it probably is</li>
+            </ul>
+
+            <h3 style="color: #f03e3e; margin-top: 30px; margin-bottom: 15px;">❌ Don'ts</h3>
+            <ul style="margin-left: 20px; line-height: 2;">
+                <li><strong>Don't click suspicious links</strong> - Even if they look legitimate</li>
+                <li><strong>Don't download unknown attachments</strong> - They may contain malware</li>
+                <li><strong>Don't share personal information via email</strong> - Banks never ask this way</li>
+                <li><strong>Don't use public WiFi for sensitive transactions</strong> - Use VPN if necessary</li>
+                <li><strong>Don't reply to suspicious emails</strong> - It confirms your email is active</li>
+                <li><strong>Don't trust caller ID</strong> - It can be spoofed</li>
+                <li><strong>Don't panic under pressure</strong> - Scammers use urgency tactics</li>
+                <li><strong>Don't reuse passwords</strong> - One breach affects all accounts</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🚨 What To Do If You're Targeted</h2>
+            <div class="tips-grid">
+                <div class="tip-card" style="background: linear-gradient(135deg, #fa5252 0%, #e03131 100%);">
+                    <div class="tip-icon">1️⃣</div>
+                    <h4>Don't Click Anything</h4>
+                    <p>Stop immediately and close the email or message</p>
+                </div>
+                <div class="tip-card" style="background: linear-gradient(135deg, #fd7e14 0%, #e8590c 100%);">
+                    <div class="tip-icon">2️⃣</div>
+                    <h4>Report It</h4>
+                    <p>Forward to your IT department or report@phishing.gov</p>
+                </div>
+                <div class="tip-card" style="background: linear-gradient(135deg, #fab005 0%, #f59f00 100%);">
+                    <div class="tip-icon">3️⃣</div>
+                    <h4>Delete the Message</h4>
+                    <p>Remove it from your inbox and trash</p>
+                </div>
+                <div class="tip-card" style="background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);">
+                    <div class="tip-icon">4️⃣</div>
+                    <h4>Change Passwords</h4>
+                    <p>If you clicked or entered info, change passwords immediately</p>
+                </div>
+                <div class="tip-card" style="background: linear-gradient(135deg, #339af0 0%, #1c7ed6 100%);">
+                    <div class="tip-icon">5️⃣</div>
+                    <h4>Scan Your Device</h4>
+                    <p>Run antivirus software to check for malware</p>
+                </div>
+                <div class="tip-card" style="background: linear-gradient(135deg, #9775fa 0%, #7950f2 100%);">
+                    <div class="tip-icon">6️⃣</div>
+                    <h4>Monitor Accounts</h4>
+                    <p>Watch for unusual activity and alert your bank</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📞 Helpful Resources</h2>
+            <ul style="margin-left: 20px; line-height: 2.5;">
+                <li><strong>Report Phishing:</strong> reportphishing@apwg.org</li>
+                <li><strong>FTC Complaint:</strong> ftc.gov/complaint</li>
+                <li><strong>FBI IC3:</strong> ic3.gov</li>
+                <li><strong>Australian Cyber Security Centre:</strong> cyber.gov.au/report</li>
+                <li><strong>Google Safe Browsing:</strong> Check suspicious URLs</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <h3>🛡️ Stay Safe Online</h3>
+        <p style="margin-top: 15px;">Share this website with friends and family to help them stay protected from phishing attacks!</p>
+        <p style="margin-top: 10px; opacity: 0.8;">© 2025 Phishing Awareness Hub - Educational Purpose</p>
+    </div>
+</div>
+
+<script>
+    let currentQuestion = 1;
+    let score = 0;
+    let answered = [false, false, false, false, false];
+
+    function showSection(sectionId) {
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        // Show selected section
+        document.getElementById(sectionId).classList.add('active');
+        
+        // Update nav buttons
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+
+        // Scroll to top
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    function checkAnswer(questionNum, result, element) {
+        if (answered[questionNum - 1]) return;
+        
+        answered[questionNum - 1] = true;
+        
+        if (result === 'correct') {
+            element.classList.add('correct');
+            score++;
+        } else {
+            element.classList.add('wrong');
+            // Highlight correct answer
+            document.querySelectorAll(`#q${questionNum} .option`).forEach(opt => {
+                if (opt.onclick.toString().includes("'correct'")) {
+                    opt.classList.add('correct');
+                }
+            });
+        }
+        
+        // Disable all options for this question
+        document.querySelectorAll(`#q${questionNum} .option`).forEach(opt => {
+            opt.style.cursor = 'not-allowed';
+            opt.onclick = null;
+        });
+        
+        // Enable next button
+        document.getElementById(`next${questionNum}`).disabled = false;
+        
+        // Update progress
+        updateProgress(questionNum);
+    }
+
+    function updateProgress(questionNum) {
+        const progress = (questionNum / 5) * 100;
+        document.getElementById('progress').style.width = progress + '%';
+    }
+
+    function nextQuestion(nextNum) {
+        document.getElementById(`q${currentQuestion}`).classList.remove('active');
+        document.getElementById(`q${nextNum}`).classList.add('active');
+        currentQuestion = nextNum;
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    function showResults() {
+        document.getElementById('q5').style.display = 'none';
+        document.getElementById('result').classList.add('show');
+        
+        let message = '';
+        let percentage = (score / 5) * 100;
+        
+        if (percentage === 100) {
+            message = '🌟 Perfect Score! You\'re a phishing expert!';
+        } else if (percentage >= 80) {
+            message = '🎉 Excellent! You know how to spot phishing!';
+        } else if (percentage >= 60) {
+            message = '👍 Good job! Keep learning!';
+        } else {
+            message = '📚 Keep studying! Review the examples and tips.';
+        }
+        
+        document.getElementById('score').innerHTML = `You scored ${score} out of 5 (${percentage}%)<br><br>${message}`;
+        updateProgress(5);
+    }
+
+    function restartQuiz() {
+        currentQuestion = 1;
+        score = 0;
+        answered = [false, false, false, false, false];
+        
+        // Reset all questions
+        for (let i = 1; i <= 5; i++) {
+            document.getElementById(`q${i}`).style.display = 'block';
+            document.getElementById(`next${i}`).disabled = true;
+            
+            document.querySelectorAll(`#q${i} .option`).forEach(opt => {
+                opt.classList.remove('correct', 'wrong');
+                opt.style.cursor = 'pointer';
+            });
+        }
+        
+        // Show first question
+        document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+        document.getElementById('q1').classList.add('active');
+        
+        // Hide result
+        document.getElementById('result').classList.remove('show');
+        
+        // Reset progress
+        document.getElementById('progress').style.width = '0%';
+        
+        // Re-add onclick handlers
+        setupQuiz();
+        
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    function setupQuiz() {
+        // This function would be called on page load to set up all event handlers
+        // In this case, handlers are already in HTML, but you could set them here
+    }
+
+    // Initialize on page load
+    window.onload = function() {
+        setupQuiz();
+    };
+</script>
